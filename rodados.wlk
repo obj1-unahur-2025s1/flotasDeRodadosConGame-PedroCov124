@@ -91,3 +91,24 @@ class Dependencia {
 object coloresValidos {
     const property listaColores = #{"rojo","verde","azul","blanco"}
 }
+
+
+
+class Pedido {
+    const distanciaARecorrer
+    var tiempoMaximo
+    var property cantidadDePasajeros
+    const coloresIncompatibles
+
+    method velocidadRequerida() = distanciaARecorrer / tiempoMaximo
+
+    method puedeCumplir(auto) = (auto.velocidadMaxima() >= self.velocidadRequerida() + 10) && (auto.capacidad() >= cantidadDePasajeros) && (self.esColorCompatible(auto))
+
+    method esColorCompatible(auto) = not coloresIncompatibles.contains(auto.color())
+
+    method acelerar() {tiempoMaximo -= 1}   
+    method relajar() {tiempoMaximo += 1}
+
+
+    method agregarColorIncompatible(color) = coloresIncompatibles.add(color)
+}
